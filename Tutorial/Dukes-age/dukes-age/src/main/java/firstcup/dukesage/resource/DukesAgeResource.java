@@ -36,18 +36,19 @@ public class DukesAgeResource {
     public String getText() {
         // Create a new Calendar for Duke's birthday
         Calendar dukesBirthday = new GregorianCalendar(1995, Calendar.MAY, 23);
-// Create a new Calendar for today
+        // Create a new Calendar for today
         Calendar now = GregorianCalendar.getInstance();
 
-// Subtract today's year from Duke's birth year, 1995
+        // Subtract today's year from Duke's birth year, 1995
         int dukesAge = now.get(Calendar.YEAR) - dukesBirthday.get(Calendar.YEAR);
         dukesBirthday.add(Calendar.YEAR, dukesAge);
 
-// If today's date is before May 23, subtract a year from Duke's age
+        // If today's date is before May 23, subtract a year from Duke's age
         if (now.before(dukesBirthday)) {
             dukesAge--;
         }
-// Return a String representation of Duke's age
+
+        // Return a String representation of Duke's age
         return "" + dukesAge;
     }
 }
