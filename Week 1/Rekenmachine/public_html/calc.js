@@ -21,6 +21,7 @@ function e()
     }
 }
 
+//loads big buttons
 function loadDocBig(url) {
     var head = document.getElementsByTagName('head')[0],
             link = document.createElement('link');
@@ -31,6 +32,7 @@ function loadDocBig(url) {
     return link;
 }
 
+//loads small buttons
 function loadDocSmall(url) {
     var head = document.getElementsByTagName('head')[0],
             link = document.createElement('link');
