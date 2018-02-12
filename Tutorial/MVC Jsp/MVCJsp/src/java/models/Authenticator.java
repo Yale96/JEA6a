@@ -3,12 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package classes;
+package models;
 
 /**
  *
  * @author Yannick van Leeuwen
  */
 public class Authenticator {
+
+    public String authenticate(String username, String password) {
+		if (("prasad".equalsIgnoreCase(username))
+				&& ("password".equals(password))) {
+			return "success";
+		} else {
+			return "failure";
+		}
+	}
     
 }

@@ -8,10 +8,13 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Insert title here</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <form action="LoginController" method="post">
+            Enter username : <input type="text" name="username"> <BR>
+            Enter password : <input type="password" name="password"> <BR>
+            <input type="submit" />
+        </form>
     </body>
 </html>
