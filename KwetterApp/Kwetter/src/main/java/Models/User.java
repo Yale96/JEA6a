@@ -5,6 +5,9 @@
  */
 package Models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Yannick van Leeuwen
@@ -14,12 +17,32 @@ public class User {
     private String Username;
     private String Password;
     private Roles Role;
+    public List<User> IsFollowing;
+    public List<User> FollowedBy;
+    public List<Tweet> MentionedIn;
+    private Profile Profile;
+    public List<Tweet> Posts;
+    public List<Tweet> LikedTweets;
     
-    public User(String username, String password, Roles role)
+    public User(String username, String password, Roles role, Profile profile)
     {
         this.Username = username;
         this.Password = password;
         this.Role = role;
+        IsFollowing = new ArrayList<User>();
+        FollowedBy = new ArrayList<User>();
+        MentionedIn = new ArrayList<Tweet>();
+        Posts = new ArrayList<Tweet>();
+        LikedTweets = new ArrayList<Tweet>();
+        this.Profile = profile;
+    }
+
+    public Profile getProfile() {
+        return Profile;
+    }
+
+    public void setProfile(Profile Profile) {
+        this.Profile = Profile;
     }
 
     public int getId() {
@@ -44,5 +67,45 @@ public class User {
 
     public void setRole(Roles Role) {
         this.Role = Role;
+    }
+    
+    public void addFollower(User follower)
+    {
+        this.FollowedBy.add(follower);
+    }
+    
+    public void addFollowing(User following)
+    {
+        this.IsFollowing.add(following);
+    }
+    
+    public void removeFollower(User follower)
+    {
+        this.FollowedBy.remove(follower);
+    }
+    
+    public void removeFollowing(User following)
+    {
+        this.IsFollowing.remove(following);
+    }
+    
+    public List<User> getAllFollowers()
+    {
+        List<User> AllFollowers = new ArrayList<>();
+        for(User u: FollowedBy)
+        {
+            AllFollowers.add(u);
+        }
+        return AllFollowers;
+    }
+    
+    public List<User> getAllFollowing()
+    {
+        List<User> AllFollowing = new ArrayList<>();
+        for(User u: IsFollowing)
+        {
+            AllFollowing.add(u);
+        }
+        return AllFollowing;
     }
 }

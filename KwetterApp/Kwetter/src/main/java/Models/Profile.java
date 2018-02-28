@@ -17,13 +17,23 @@ public class Profile {
     private String Biography;
     private String Location;
     private String Website;
+    private User Owner;
     
-    public Profile(BufferedImage picture, String biography, String location, String website)
+    public Profile(BufferedImage picture, String biography, String location, String website, User owner)
     {
         this.Picture = picture;
         this.Biography = biography;
         this.Location = location;
         this.Website = website;
+        this.Owner = owner;
+    }
+
+    public User getOwner() {
+        return Owner;
+    }
+
+    public void setOwner(User Owner) {
+        this.Owner = Owner;
     }
 
     public int getId() {
