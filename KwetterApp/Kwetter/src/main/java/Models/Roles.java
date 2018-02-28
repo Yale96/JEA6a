@@ -9,6 +9,7 @@ package Models;
  *
  * @author Yannick van Leeuwen
  */
-public class User {
-    
+public enum Roles {
+    ADMIN,
+    USER;
 }
