@@ -14,7 +14,7 @@ import java.util.List;
  * @author Yannick van Leeuwen
  */
 public interface ProfileDao {
-    void addProfile();
+    void addProfile(Profile profile);
     
     void updateProfile(Profile profile);
     

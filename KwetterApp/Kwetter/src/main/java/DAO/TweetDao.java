@@ -14,7 +14,7 @@ import java.util.List;
  * @author Yannick van Leeuwen
  */
 public interface TweetDao {
-    void addTweet();
+    void addTweet(Tweet tweet);
     
     void updateTweet(Tweet tweet);
     

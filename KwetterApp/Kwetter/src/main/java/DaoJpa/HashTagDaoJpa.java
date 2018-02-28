@@ -7,6 +7,7 @@ package DaoJpa;
 
 import DAO.HashTagDao;
 import Models.HashTag;
+import Models.Profile;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -32,18 +33,25 @@ public class HashTagDaoJpa extends DaoFacade<HashTag> implements HashTagDao {
     }
 
     @Override
-    public void addHashTag() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void addHashTag(HashTag hashTag) {
+        em.getTransaction().begin();
+        em.persist(hashTag);
+        em.getTransaction().commit();
     }
 
     @Override
     public void updateHashTag(HashTag hashTag) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        em.getTransaction().begin();
+        em.merge(hashTag);
+        em.getTransaction().commit();
     }
 
     @Override
     public void deleteHashTag(HashTag hashTag) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        em.getTransaction().begin();
+        HashTag ht = em.merge(hashTag);
+        em.remove(ht);
+        em.getTransaction().commit();
     }
 
     @Override

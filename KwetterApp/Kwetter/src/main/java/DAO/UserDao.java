@@ -14,7 +14,7 @@ import java.util.List;
  * @author Yannick van Leeuwen
  */
 public interface UserDao {
-    void registerUser();
+    void registerUser(User user);
     
     void updateUser(User user);
     

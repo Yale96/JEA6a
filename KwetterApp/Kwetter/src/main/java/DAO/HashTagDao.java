@@ -14,7 +14,7 @@ import java.util.List;
  * @author Yannick van Leeuwen
  */
 public interface HashTagDao {
-    void addHashTag();
+    void addHashTag(HashTag hashTag);
     
     void updateHashTag(HashTag hashTag);
     

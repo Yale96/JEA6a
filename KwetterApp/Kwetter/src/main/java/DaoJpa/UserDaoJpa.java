@@ -39,18 +39,25 @@ public class UserDaoJpa extends DaoFacade<User> implements UserDao {
     }
 
     @Override
-    public void registerUser() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void registerUser(User user) {
+        em.getTransaction().begin();
+        em.persist(user);
+        em.getTransaction().commit();
     }
 
     @Override
     public void updateUser(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        em.getTransaction().begin();
+        em.merge(user);
+        em.getTransaction().commit();
     }
 
     @Override
     public void deleteUser(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        em.getTransaction().begin();
+        User u = em.merge(user);
+        em.remove(u);
+        em.getTransaction().commit();
     }
 
     @Override

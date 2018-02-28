@@ -37,18 +37,25 @@ public class ProfileDaoJpa extends DaoFacade<Profile> implements ProfileDao {
     }
 
     @Override
-    public void addProfile() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void addProfile(Profile profile) {
+        em.getTransaction().begin();
+        em.persist(profile);
+        em.getTransaction().commit();
     }
 
     @Override
     public void updateProfile(Profile profile) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        em.getTransaction().begin();
+        em.merge(profile);
+        em.getTransaction().commit();
     }
 
     @Override
     public void deleteProfile(Profile profile) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        em.getTransaction().begin();
+        Profile p = em.merge(profile);
+        em.remove(p);
+        em.getTransaction().commit();
     }
 
     @Override

@@ -39,18 +39,25 @@ public class TweetDaoJpa extends DaoFacade<Tweet> implements TweetDao {
     }
 
     @Override
-    public void addTweet() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void addTweet(Tweet tweet) {
+        em.getTransaction().begin();
+        em.persist(tweet);
+        em.getTransaction().commit();
     }
 
     @Override
     public void updateTweet(Tweet tweet) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        em.getTransaction().begin();
+        em.merge(tweet);
+        em.getTransaction().commit();
     }
 
     @Override
     public void deleteTweet(Tweet tweet) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        em.getTransaction().begin();
+        Tweet t = em.merge(tweet);
+        em.remove(t);
+        em.getTransaction().commit();
     }
 
     @Override
