@@ -5,30 +5,25 @@
  */
 package DaoJpa;
 
-import DAO.ProfileDao;
+import DAO.HashTagDao;
 import Models.HashTag;
-import Models.Profile;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
 
 /**
  *
  * @author Yannick van Leeuwen
  */
 @Stateless @JPA
-public class ProfileDaoJpa extends DaoFacade<Profile> implements ProfileDao {
-    
+public class HashTagDaoJpa extends DaoFacade<HashTag> implements HashTagDao {
     @PersistenceContext
     private EntityManager em;
     
-    public ProfileDaoJpa()
+    public HashTagDaoJpa()
     {
-        super(Profile.class);
+        super(HashTag.class);
     }
     
     @Override
@@ -37,31 +32,31 @@ public class ProfileDaoJpa extends DaoFacade<Profile> implements ProfileDao {
     }
 
     @Override
-    public void addProfile() {
+    public void addHashTag() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void updateProfile(Profile profile) {
+    public void updateHashTag(HashTag hashTag) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void deleteProfile(Profile profile) {
+    public void deleteHashTag(HashTag hashTag) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public ArrayList<Profile> getAllProfiles() {
-        Query query = em.createQuery("SELECT p FROM Profile p");
-         return  new ArrayList<>(query.getResultList());
+    public ArrayList<HashTag> getAllHashtags() {
+        Query query = em.createNamedQuery("SELECT h FROM HashTags h");
+        return new ArrayList<>(query.getResultList());
     }
 
     @Override
-    public Profile getProfileByID(int id) {
-        TypedQuery<Profile> query = em.createNamedQuery("profile.getProfileById", Profile.class);
+    public HashTag getHashTagById(int id) {
+        TypedQuery<HashTag> query = em.createNamedQuery("hashtag.getHashTagById", HashTag.class);
         query.setParameter("id", id);
-        List<Profile> result = query.getResultList();
+        List<HashTag> result = query.getResultList();
         System.out.println("count : " + result.size());
         return result.get(0);
     }

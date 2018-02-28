@@ -5,10 +5,22 @@
  */
 package DAO;
 
+import Models.User;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Yannick van Leeuwen
  */
 public interface UserDao {
+    void registerUser();
     
+    void updateUser(User user);
+    
+    void deleteUser(User user);
+    
+    ArrayList<User> getAllUsers();
+    
+    User getUserById(int id);
 }

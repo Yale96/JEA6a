@@ -5,10 +5,22 @@
  */
 package DAO;
 
+import Models.Tweet;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Yannick van Leeuwen
  */
 public interface TweetDao {
+    void addTweet();
     
+    void updateTweet(Tweet tweet);
+    
+    void deleteTweet(Tweet tweet);
+    
+    ArrayList<Tweet> getAllTweets();
+    
+    Tweet getTweetById(int id); 
 }
