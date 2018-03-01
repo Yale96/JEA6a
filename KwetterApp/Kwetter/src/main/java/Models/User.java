@@ -16,11 +16,11 @@ public class User {
     private int Id;
     private String Username;
     private String Password;
-    private Roles Role;
     public List<User> IsFollowing;
     public List<User> FollowedBy;
     public List<Tweet> MentionedIn;
     private Profile Profile;
+    private Roles Role;
     public List<Tweet> Posts;
     public List<Tweet> LikedTweets;
     
@@ -28,15 +28,23 @@ public class User {
     {
         this.Username = username;
         this.Password = password;
-        this.Role = role;
         IsFollowing = new ArrayList<User>();
         FollowedBy = new ArrayList<User>();
         MentionedIn = new ArrayList<Tweet>();
         Posts = new ArrayList<Tweet>();
+        this.Role = role;
         LikedTweets = new ArrayList<Tweet>();
         this.Profile = profile;
     }
 
+    public Roles getRole() {
+        return Role;
+    }
+
+    public void setRole(Roles Role) {
+        this.Role = Role;
+    }
+    
     public Profile getProfile() {
         return Profile;
     }
@@ -59,14 +67,6 @@ public class User {
 
     public void setUsername(String Username) {
         this.Username = Username;
-    }
-
-    public Roles getRole() {
-        return Role;
-    }
-
-    public void setRole(Roles Role) {
-        this.Role = Role;
     }
     
     public void addFollower(User follower)
