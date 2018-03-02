@@ -15,14 +15,22 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Yannick van Leeuwen
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "user.findById", query = "SELECT u FROM User u WHERE u.name = :name"),
+    @NamedQuery(name = "user.count", query = "SELECT COUNT(s) FROM User u")})
+
+@XmlRootElement
 public class User implements Serializable {
     
     @Id @GeneratedValue
@@ -32,8 +40,6 @@ public class User implements Serializable {
     @Column(unique=true)
     private String email;
     private String password;
-    @OneToOne
-    private Profile profile;
     @ManyToMany
     private Set<User> following;
     @Transient
@@ -67,10 +73,6 @@ public class User implements Serializable {
 
     public String getPassword() {
         return password;
-    }
-
-    public Profile getProfile(){
-        return profile;
     }
 
     @Override

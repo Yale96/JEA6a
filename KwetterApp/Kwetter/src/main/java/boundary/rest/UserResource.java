@@ -36,7 +36,8 @@ public class UserResource {
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public User getById(@PathParam("id") Long id) {
-        return userService.getById(new Long(id));
+    public User getStudent(@PathParam("id") Long id) {
+        User user = userService.getById(id);
+        return user;
     }
 }

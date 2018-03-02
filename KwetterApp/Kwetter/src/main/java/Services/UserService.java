@@ -19,8 +19,7 @@ import javax.inject.Inject;
 @Stateless
 public class UserService {
 
-    @Inject
-    @JPA
+    @Inject @JPA
     private UserDao userDao;
 
     public void addUser(User user) {
@@ -28,11 +27,11 @@ public class UserService {
     }
 
     public List<User> getUsers() {
-        return userDao.getAll();
+        return userDao.getUsers();
     }
 
     public User getById(Long id) {
-        return new User("daan");
+        return new User("Yannick");
     }
 
     public UserService(){

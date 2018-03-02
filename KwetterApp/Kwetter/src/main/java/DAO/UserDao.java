@@ -5,7 +5,6 @@
  */
 package DAO;
 
-import Models.Tweet;
 import Models.User;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +17,8 @@ public interface UserDao {
     void create(User user);
     
     void remove(User user);
-    
-    User findById(int id);
-    
-    ArrayList<User> getAll();
+
+    User findById(Long id);
+
+    ArrayList<User> getUsers();
 }
