@@ -6,6 +6,7 @@
 package DAO;
 
 import Models.HashTag;
+import Models.Tweet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,13 +15,11 @@ import java.util.List;
  * @author Yannick van Leeuwen
  */
 public interface HashTagDao {
-    void addHashTag(HashTag hashTag);
+    void create(HashTag hashTag);
     
-    void updateHashTag(HashTag hashTag);
+    void remove(HashTag hashTag);
     
-    void deleteHashTag(HashTag hashTag);
+    HashTag findById(int id);
     
-    ArrayList<HashTag> getAllHashtags();
-    
-    HashTag getHashTagById(int id);
+    ArrayList<HashTag> getAll();
 }

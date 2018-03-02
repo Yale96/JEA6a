@@ -5,6 +5,7 @@
  */
 package DAO;
 
+import Models.HashTag;
 import Models.Profile;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,13 +15,11 @@ import java.util.List;
  * @author Yannick van Leeuwen
  */
 public interface ProfileDao {
-    void addProfile(Profile profile);
+    void create(Profile profile);
     
-    void updateProfile(Profile profile);
+    void remove(Profile profile);
     
-    void deleteProfile(Profile profile);
+    Profile findById(int id);
     
-    ArrayList<Profile> getAllProfiles();
-    
-    Profile getProfileByID(int id);
+    ArrayList<Profile> getAll();
 }

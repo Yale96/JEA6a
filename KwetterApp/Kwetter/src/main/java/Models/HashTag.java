@@ -7,12 +7,19 @@ package Models;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  *
  * @author Yannick van Leeuwen
  */
+@Entity
 public class HashTag {
+    
+    @Id
+    @GeneratedValue
     private String Content;
     public List<Tweet> TaggedIn;
     

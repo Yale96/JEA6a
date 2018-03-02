@@ -14,13 +14,11 @@ import java.util.List;
  * @author Yannick van Leeuwen
  */
 public interface TweetDao {
-    void addTweet(Tweet tweet);
+    void create(Tweet tweet);
     
-    void updateTweet(Tweet tweet);
+    void remove(Tweet tweet);
     
-    void deleteTweet(Tweet tweet);
+    Tweet findById(int id);
     
-    ArrayList<Tweet> getAllTweets();
-    
-    Tweet getTweetById(int id); 
+    ArrayList<Tweet> getAll();
 }

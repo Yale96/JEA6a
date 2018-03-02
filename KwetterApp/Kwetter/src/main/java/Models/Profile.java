@@ -6,12 +6,19 @@
 package Models;
 
 import java.awt.image.BufferedImage;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  *
  * @author Yannick van Leeuwen
  */
+@Entity
 public class Profile {
+    
+    @Id
+    @GeneratedValue
     private int Id;
     private BufferedImage Picture;
     private String Biography;

@@ -5,107 +5,93 @@
  */
 package Models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 /**
  *
  * @author Yannick van Leeuwen
  */
-public class User {
-    private int Id;
-    private String Username;
-    private String Password;
-    public List<User> IsFollowing;
-    public List<User> FollowedBy;
-    public List<Tweet> MentionedIn;
-    private Profile Profile;
-    private Roles Role;
-    public List<Tweet> Posts;
-    public List<Tweet> LikedTweets;
+@Entity
+public class User implements Serializable {
     
-    public User(String username, String password, Roles role, Profile profile)
+    @Id @GeneratedValue
+    private Long id;
+    @Column(unique=true)
+    private String username;
+    @Column(unique=true)
+    private String email;
+    private String password;
+    @OneToOne
+    private Profile profile;
+    @ManyToMany
+    private Set<User> following;
+    @Transient
+    private Set<User> followers;
+    
+    public User()
     {
-        this.Username = username;
-        this.Password = password;
-        IsFollowing = new ArrayList<User>();
-        FollowedBy = new ArrayList<User>();
-        MentionedIn = new ArrayList<Tweet>();
-        Posts = new ArrayList<Tweet>();
-        this.Role = role;
-        LikedTweets = new ArrayList<Tweet>();
-        this.Profile = profile;
-    }
-
-    public Roles getRole() {
-        return Role;
-    }
-
-    public void setRole(Roles Role) {
-        this.Role = Role;
+        
     }
     
-    public Profile getProfile() {
-        return Profile;
+    public User(String username)
+    {
+        
     }
-
-    public void setProfile(Profile Profile) {
-        this.Profile = Profile;
-    }
-
-    public int getId() {
-        return Id;
-    }
-
-    public void setId(int Id) {
-        this.Id = Id;
+    
+    public Long getId() {
+        return id;
     }
 
     public String getUsername() {
-        return Username;
+        return username;
     }
 
-    public void setUsername(String Username) {
-        this.Username = Username;
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public Profile getProfile(){
+        return profile;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 53 * hash + Objects.hashCode(this.id);
+        return hash;
     }
     
-    public void addFollower(User follower)
-    {
-        this.FollowedBy.add(follower);
-    }
-    
-    public void addFollowing(User following)
-    {
-        this.IsFollowing.add(following);
-    }
-    
-    public void removeFollower(User follower)
-    {
-        this.FollowedBy.remove(follower);
-    }
-    
-    public void removeFollowing(User following)
-    {
-        this.IsFollowing.remove(following);
-    }
-    
-    public List<User> getAllFollowers()
-    {
-        List<User> AllFollowers = new ArrayList<>();
-        for(User u: FollowedBy)
-        {
-            AllFollowers.add(u);
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
         }
-        return AllFollowers;
-    }
-    
-    public List<User> getAllFollowing()
-    {
-        List<User> AllFollowing = new ArrayList<>();
-        for(User u: IsFollowing)
-        {
-            AllFollowing.add(u);
+        if (obj == null) {
+            return false;
         }
-        return AllFollowing;
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final User other = (User) obj;
+        return Objects.equals(this.username, other.username);
     }
 }
