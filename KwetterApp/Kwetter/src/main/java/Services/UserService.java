@@ -31,7 +31,7 @@ public class UserService {
     }
 
     public User getById(Long id) {
-        return new User("Yannick");
+        return new User("Yannick", "Yannick", "Yannick");
     }
 
     public UserService(){

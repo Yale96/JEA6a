@@ -29,7 +29,7 @@ public class StartUp {
 
     @PostConstruct
     private void intData(){
-        service.addUser(new User("YannickVanLeeuwen"));
-        service.addUser(new User("DennisVanLeeuwen"));
+        service.addUser(new User("TestOne", "TestOne", "TestOne"));
+        service.addUser(new User("TestTwo", "TestTwo", "TestTwo"));
     }
 }

@@ -6,18 +6,16 @@
 package Models;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -27,13 +25,14 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "user.findById", query = "SELECT u FROM User u WHERE u.name = :name"),
-    @NamedQuery(name = "user.count", query = "SELECT COUNT(s) FROM User u")})
+    @NamedQuery(name = "user.findById", query = "SELECT u FROM User u WHERE u.username = :name"),
+    @NamedQuery(name = "user.count", query = "SELECT COUNT(u) FROM User u")})
 
 @XmlRootElement
 public class User implements Serializable {
     
-    @Id @GeneratedValue
+    @Id 
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(unique=true)
     private String username;
@@ -50,9 +49,11 @@ public class User implements Serializable {
         
     }
     
-    public User(String username)
+    public User(String email, String password, String username)
     {
-        
+        this.email = email;
+        this.password = password;
+        this.username = username;
     }
     
     public Long getId() {
