@@ -6,6 +6,7 @@
 package Models;
 
 import java.io.Serializable;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Set;
@@ -117,7 +118,30 @@ public class User implements Serializable {
     public String getPassword() {
         return password;
     }
+    
+    public void setPassword(String password)
+    {
+        String hashstring = null;
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(password.getBytes("UTF-8"));
+            StringBuilder hexString = new StringBuilder();
 
+            for (int i = 0; i < hash.length; i++) {
+                String hex = Integer.toHexString(0xff & hash[i]);
+                if(hex.length() == 1)
+                    hexString.append('0');
+                hexString.append(hex);
+            }
+
+            hashstring = hexString.toString();
+        }
+        catch (Exception x) {
+            System.out.println(x);
+        }
+        this.password = (hashstring == null || hashstring.isEmpty()) ? password : hashstring;
+    }
+    
     public ArrayList<User> getLeaders() {
         return supers;
     }

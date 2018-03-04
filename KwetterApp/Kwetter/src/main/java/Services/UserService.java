@@ -35,7 +35,10 @@ public class UserService {
     }
 
     public User getById(Long id) {
-        return new User("yannickvanleeuwen@i-lion.nl", "Yannick", "Yannick", "Admin");
+        User usr = new User("yannickvanleeuwen@i-lion.nl", "Yannick", "Yannick", "Admin");
+        usr.setPassword("Yannick");
+        System.out.println(usr.getPassword());
+        return usr;
     }
 
     public UserService(){
