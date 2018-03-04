@@ -37,7 +37,7 @@ public class UserService {
     public User getById(Long id) {
         User usr = new User("yannickvanleeuwen@i-lion.nl", "Yannick", "Yannick", "Admin");
         usr.setPassword("Yannick");
-        System.out.println(usr.getPassword());
+        System.out.println("USER PASSWORD NA ENCRYPTING: " + usr.getPassword());
         return usr;
     }
 

@@ -34,10 +34,16 @@ public class StartUp {
 
     @PostConstruct
     private void intData(){
+//        User uOne = new User("TestOne", "TestOne", "TestOne", "TestOne");
+//        uOne.setPassword("Yannick");
+//        User uTwo = new User("TestTwo", "TestTwo", "TestTwo", "TestTwo");
+//        uOne.setPassword("Dennis");
+//        uService.addUser(uOne);
+//        uService.addUser(uTwo);
         uService.addUser(new User("TestOne", "TestOne", "TestOne", "TestOne"));
         uService.addUser(new User("TestTwo", "TestTwo", "TestTwo", "TestTwo"));
         tService.addTweet(new Tweet("Test", new Date()));
-        pService.addProfile(new Profile("Test", "Test", "Test", "Test", "Test"));
-        pService.addProfile(new Profile("Test", "Test", "Test", "Test", "Test"));
+        pService.addProfile(new Profile("TestOne", "TestOne", "TestOne", "TestOne", "TestOne"));
+        pService.addProfile(new Profile("TestTwo", "TestTwo", "TestTwo", "TestTwo", "TestTwo"));
     }
 }
