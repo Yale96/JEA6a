@@ -63,7 +63,7 @@ public class Tweet implements Serializable {
             , inverseJoinColumns = @JoinColumn(name = "user_mention_id", referencedColumnName = "id"))
     private ArrayList<User> mentionedUsers;
     
-        @ManyToMany
+    @ManyToMany
     @JoinTable(name = "tweet_user_likes"
             , joinColumns = @JoinColumn(name = "tweet_like_id", referencedColumnName = "id")
             , inverseJoinColumns = @JoinColumn(name = "tweet_like_id", referencedColumnName = "id"))

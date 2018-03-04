@@ -7,6 +7,8 @@ package Models;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,16 +29,15 @@ import javax.persistence.NamedQuery;
     @NamedQuery(name = "hashtag.count", query = "SELECT COUNT(h) FROM HashTag h")})
 public class HashTag implements Serializable{
     
-    @Id 
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
+
+    @Column(nullable = false, unique = true)
     private String content;
-    @ManyToMany
-    @JoinTable(
-      name="TAGGED_USER",
-      joinColumns=@JoinColumn(name="USER_ID", referencedColumnName="ID"),
-      inverseJoinColumns=@JoinColumn(name="TWEET_ID", referencedColumnName="ID"))
-    private ArrayList<Tweet> tagged;
+
+    @ManyToMany(mappedBy="hashtags", cascade = { CascadeType.MERGE, CascadeType.PERSIST})
+    private ArrayList<Tweet> tweets;
     
     public HashTag()
     {
@@ -46,9 +47,17 @@ public class HashTag implements Serializable{
     public HashTag(String content)
     {
         this.content = content;
-        tagged = new ArrayList<Tweet>();
+        tweets = new ArrayList<Tweet>();
+    }
+    
+    public long getId() {
+        return id;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+    
     public String getContent() {
         return content;
     }
@@ -57,12 +66,11 @@ public class HashTag implements Serializable{
         this.content = content;
     }
 
-    public ArrayList<Tweet> getTagged() {
-        return tagged;
+    public ArrayList<Tweet> getTweets() {
+        return tweets;
     }
 
-    public void setTagged(ArrayList<Tweet> tagged) {
-        this.tagged = tagged;
+    public void setTweets(ArrayList<Tweet> tweets) {
+        this.tweets = tweets;
     }
-    
 }

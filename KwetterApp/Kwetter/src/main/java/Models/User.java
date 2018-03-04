@@ -39,14 +39,14 @@ public class User implements Serializable {
     
     @ManyToMany (fetch = FetchType.EAGER)
     @JoinTable(name = "t_leaders"
-            , joinColumns = @JoinColumn(name = "leader_id", referencedColumnName = "id", nullable = false)
+            , joinColumns = @JoinColumn(name = "super_id", referencedColumnName = "id", nullable = false)
             , inverseJoinColumns = @JoinColumn(name = "follower_id", referencedColumnName = "id", nullable = false))
-    private ArrayList<User> leaders;
+    private ArrayList<User> supers;
     
     @ManyToMany (fetch = FetchType.EAGER)
     @JoinTable(name = "t_user_followers"
             , joinColumns = @JoinColumn(name = "follower_id", referencedColumnName = "id", nullable = false)
-            , inverseJoinColumns = @JoinColumn(name = "leaders_id", referencedColumnName = "id", nullable = false))
+            , inverseJoinColumns = @JoinColumn(name = "super_id", referencedColumnName = "id", nullable = false))
     private ArrayList<User> followers;
     
     @ManyToMany(mappedBy="likes", cascade = CascadeType.MERGE)
@@ -119,11 +119,11 @@ public class User implements Serializable {
     }
 
     public ArrayList<User> getLeaders() {
-        return leaders;
+        return supers;
     }
 
     public void setLeaders(ArrayList<User> leaders) {
-        this.leaders = leaders;
+        this.supers = leaders;
     }
 
     public ArrayList<User> getFollowers() {
