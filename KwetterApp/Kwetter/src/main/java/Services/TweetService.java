@@ -5,9 +5,12 @@
  */
 package Services;
 
-import DAO.UserDao;
 import DAO.JPA;
+import DAO.TweetDao;
+import DAO.UserDao;
+import Models.Tweet;
 import Models.User;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -18,27 +21,27 @@ import javax.inject.Inject;
  * @author Yannick van Leeuwen
  */
 @Stateless
-public class UserService {
+public class TweetService {
     
     @EJB
-    private ProfileService pService;
+    private UserService uService;
     
     @Inject @JPA
-    private UserDao userDao;
+    private TweetDao tweetDao;
 
-    public void addUser(User user) {
-        userDao.create(user);
+    public void addTweet(Tweet tweet) {
+        tweetDao.create(tweet);
     }
 
-    public List<User> getUsers() {
-        return userDao.getUsers();
+    public List<Tweet> getTweets() {
+        return tweetDao.getTweets();
     }
 
-    public User getById(Long id) {
-        return new User("yannickvanleeuwen@i-lion.nl", "Yannick", "Yannick", "Admin");
+    public Tweet getById(Long id) {
+        return new Tweet("Yannick", new Date());
     }
 
-    public UserService(){
+    public TweetService(){
 
     }
 }

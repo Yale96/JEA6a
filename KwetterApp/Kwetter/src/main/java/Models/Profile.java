@@ -10,8 +10,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 /**
  *
  * @author Yannick van Leeuwen
@@ -23,8 +26,17 @@ import javax.persistence.NamedQuery;
 public class Profile implements Serializable{
 
     @Id 
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @OneToOne
+    @JoinTable(name="user_profile",
+        joinColumns=
+            @JoinColumn(name="profile_id", referencedColumnName="ID"),
+        inverseJoinColumns=
+            @JoinColumn(name="user_id", referencedColumnName="ID"))
+    private User user;
+    
     private String name;
     private String location;
     private String web;
@@ -35,8 +47,12 @@ public class Profile implements Serializable{
 
     }
 
-    public Profile(Long id){
-        this.id = id;
+    public Profile(String name, String location, String web, String bio, String picture){
+        this.name = name;
+        this.location = location;
+        this.web = web;
+        this.bio = bio;
+        this.picture = picture;
     }
 
     public Long getId(){
@@ -46,7 +62,17 @@ public class Profile implements Serializable{
     public String getName() {
         return name;
     }
-
+    
+    public User getUser()
+    {
+        return user;
+    }
+    
+    public void setUser(User user)
+    {
+        this.user = user;
+    }
+    
     public void setName(String name) {
         this.name = name;
     }

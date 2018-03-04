@@ -6,17 +6,10 @@
 package Models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Set;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -32,34 +25,83 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class User implements Serializable {
     
     @Id 
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(unique=true)
+    
+    @Column(nullable = false, unique=true)
     private String username;
+    
     @Column(unique=true)
     private String email;
+    
+    @Column(nullable = false)
     private String password;
-    @ManyToMany
-    private Set<User> following;
-    @Transient
-    private Set<User> followers;
+    
+    @ManyToMany (fetch = FetchType.EAGER)
+    @JoinTable(name = "t_leaders"
+            , joinColumns = @JoinColumn(name = "leader_id", referencedColumnName = "id", nullable = false)
+            , inverseJoinColumns = @JoinColumn(name = "follower_id", referencedColumnName = "id", nullable = false))
+    private ArrayList<User> leaders;
+    
+    @ManyToMany (fetch = FetchType.EAGER)
+    @JoinTable(name = "t_user_followers"
+            , joinColumns = @JoinColumn(name = "follower_id", referencedColumnName = "id", nullable = false)
+            , inverseJoinColumns = @JoinColumn(name = "leaders_id", referencedColumnName = "id", nullable = false))
+    private ArrayList<User> followers;
+    
+    @ManyToMany(mappedBy="likes", cascade = CascadeType.MERGE)
+    private ArrayList<Tweet> likes;
+    
+    @ManyToMany(mappedBy="mentionedUsers", cascade = CascadeType.MERGE)
+    private ArrayList<Tweet> mentions;
+    
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.MERGE)
+    private ArrayList<Tweet> tweets;
+    
+    @OneToOne
+    @JoinTable(name="user_profile",
+        joinColumns=
+            @JoinColumn(name="user_id", referencedColumnName="ID"),
+        inverseJoinColumns=
+            @JoinColumn(name="profile_id", referencedColumnName="ID"))
+    private Profile profile;
+    
+    @Column(nullable = false)
+    private String rol;
     
     public User()
     {
         
     }
     
-    public User(String email, String password, String username)
+    public User(String email, String password, String username, String rol)
     {
         this.email = email;
         this.password = password;
         this.username = username;
+        this.rol = rol;
     }
     
     public Long getId() {
         return id;
     }
 
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+    
     public String getUsername() {
         return username;
     }
@@ -76,6 +118,46 @@ public class User implements Serializable {
         return password;
     }
 
+    public ArrayList<User> getLeaders() {
+        return leaders;
+    }
+
+    public void setLeaders(ArrayList<User> leaders) {
+        this.leaders = leaders;
+    }
+
+    public ArrayList<User> getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(ArrayList<User> followers) {
+        this.followers = followers;
+    }
+
+    public ArrayList<Tweet> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(ArrayList<Tweet> likes) {
+        this.likes = likes;
+    }
+
+    public ArrayList<Tweet> getMentions() {
+        return mentions;
+    }
+
+    public void setMentions(ArrayList<Tweet> mentions) {
+        this.mentions = mentions;
+    }
+
+    public ArrayList<Tweet> getTweets() {
+        return tweets;
+    }
+
+    public void setTweets(ArrayList<Tweet> tweets) {
+        this.tweets = tweets;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 7;

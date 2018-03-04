@@ -8,14 +8,23 @@ package Models;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -28,32 +37,57 @@ import javax.persistence.OneToOne;
 public class Tweet implements Serializable {
     
     @Id 
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @Column(nullable = false)
     private String content;
+    
+    @Column(nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date timeStamp;
-    @OneToOne
-    private ArrayList<Tweet> responses;
+    
     @ManyToMany
+    @JoinTable(name = "tweet_hashtag"
+            , joinColumns = @JoinColumn(name = "tweet_hashtag_id", referencedColumnName = "id")
+            , inverseJoinColumns = @JoinColumn(name = "hashtag_hashtag_id", referencedColumnName = "id"))
     private ArrayList<HashTag> hashtags;
+
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @JoinColumn(name = "owner_id", referencedColumnName = "id")
+    private User owner;
+    
     @ManyToMany
+    @JoinTable(name = "tweet_tweeter_mentions"
+            , joinColumns = @JoinColumn(name = "tweet_mention_id", referencedColumnName = "id")
+            , inverseJoinColumns = @JoinColumn(name = "user_mention_id", referencedColumnName = "id"))
     private ArrayList<User> mentionedUsers;
-    @ManyToMany
+    
+        @ManyToMany
+    @JoinTable(name = "tweet_user_likes"
+            , joinColumns = @JoinColumn(name = "tweet_like_id", referencedColumnName = "id")
+            , inverseJoinColumns = @JoinColumn(name = "tweet_like_id", referencedColumnName = "id"))
     private ArrayList<User> likes;
+    
+    @OneToMany
+    @JoinTable(name = "tweet_responses"
+            , joinColumns = @JoinColumn(name = "tweet_id", referencedColumnName = "id")
+            , inverseJoinColumns = @JoinColumn(name = "tweet_id", referencedColumnName = "id"))
+    private ArrayList<Tweet> responses;
     
     public Tweet()
     {
-        
+       responses = new ArrayList<Tweet>();
+       hashtags = new ArrayList<HashTag>();
+       mentionedUsers = new ArrayList<User>();
+       likes = new ArrayList<User>(); 
     }
     
     public Tweet(String content, Date timeStamp)
     {
         this.content = content;
         this.timeStamp = timeStamp;
-        responses = new ArrayList<Tweet>();
-        hashtags = new ArrayList<HashTag>();
-        mentionedUsers = new ArrayList<User>();
-        likes = new ArrayList<User>();
+        
     }
 
     public Long getId() {

@@ -6,11 +6,13 @@
 package DAOJpa;
 
 import DAO.DaoFacade;
+import DAO.JPA;
 import DAO.TweetDao;
 import Models.HashTag;
 import Models.Tweet;
 import java.util.ArrayList;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -20,6 +22,7 @@ import javax.persistence.TypedQuery;
  *
  * @author Yannick van Leeuwen
  */
+@Stateless @JPA
 public class TweetDaoJpa extends DaoFacade<Tweet> implements TweetDao {
     
     @PersistenceContext
