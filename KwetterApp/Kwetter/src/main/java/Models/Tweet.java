@@ -66,13 +66,13 @@ public class Tweet implements Serializable {
     @ManyToMany
     @JoinTable(name = "tweet_user_likes"
             , joinColumns = @JoinColumn(name = "tweet_like_id", referencedColumnName = "id")
-            , inverseJoinColumns = @JoinColumn(name = "tweet_like_id", referencedColumnName = "id"))
+            , inverseJoinColumns = @JoinColumn(name = "user_like_id", referencedColumnName = "id"))
     private ArrayList<User> likes;
     
     @OneToMany
     @JoinTable(name = "tweet_responses"
             , joinColumns = @JoinColumn(name = "tweet_id", referencedColumnName = "id")
-            , inverseJoinColumns = @JoinColumn(name = "tweet_id", referencedColumnName = "id"))
+            , inverseJoinColumns = @JoinColumn(name = "responded_tweet_id", referencedColumnName = "id"))
     private ArrayList<Tweet> responses;
     
     public Tweet()
@@ -90,6 +90,14 @@ public class Tweet implements Serializable {
         
     }
 
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+    
     public Long getId() {
         return id;
     }

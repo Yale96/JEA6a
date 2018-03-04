@@ -39,13 +39,13 @@ public class User implements Serializable {
     private String password;
     
     @ManyToMany (fetch = FetchType.EAGER)
-    @JoinTable(name = "t_leaders"
+    @JoinTable(name = "user_leaders"
             , joinColumns = @JoinColumn(name = "super_id", referencedColumnName = "id", nullable = false)
             , inverseJoinColumns = @JoinColumn(name = "follower_id", referencedColumnName = "id", nullable = false))
     private ArrayList<User> supers;
     
     @ManyToMany (fetch = FetchType.EAGER)
-    @JoinTable(name = "t_user_followers"
+    @JoinTable(name = "user_followers"
             , joinColumns = @JoinColumn(name = "follower_id", referencedColumnName = "id", nullable = false)
             , inverseJoinColumns = @JoinColumn(name = "super_id", referencedColumnName = "id", nullable = false))
     private ArrayList<User> followers;
@@ -59,12 +59,14 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "owner", cascade = CascadeType.MERGE)
     private ArrayList<Tweet> tweets;
     
-    @OneToOne
-    @JoinTable(name="user_profile",
-        joinColumns=
-            @JoinColumn(name="user_id", referencedColumnName="ID"),
-        inverseJoinColumns=
-            @JoinColumn(name="profile_id", referencedColumnName="ID"))
+//    @OneToOne(cascade = CascadeType.PERSIST)
+//    @JoinTable(name="user_profile",
+//        joinColumns=
+//            @JoinColumn(name="user_id", referencedColumnName="ID"),
+//        inverseJoinColumns=
+//            @JoinColumn(name="profile_id", referencedColumnName="ID"))
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "profile_id", referencedColumnName = "id")
     private Profile profile;
     
     @Column(nullable = false)

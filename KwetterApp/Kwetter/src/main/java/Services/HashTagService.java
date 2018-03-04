@@ -23,7 +23,7 @@ public class HashTagService {
     @Inject @JPA
     private HashTagDao hashTagDao;
 
-    public void addProfile(HashTag hashTag) {
+    public void addHashTag(HashTag hashTag) {
         hashTagDao.create(hashTag);
     }
 
