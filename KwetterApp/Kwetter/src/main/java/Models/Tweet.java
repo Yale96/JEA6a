@@ -96,10 +96,10 @@ public class Tweet implements Serializable {
 
     public void setOwner(User owner) {
         this.owner = owner;
-        if(!owner.getTweets().contains(this))
-        {
-            owner.addTweet(this);
-        }
+//        if(!owner.getTweets().contains(this))
+//        {
+//            owner.addTweet(this);
+//        }
     }
     
     public long getId() {
@@ -156,5 +156,26 @@ public class Tweet implements Serializable {
 
     public void setLikes(ArrayList<User> likes) {
         this.likes = likes;
+    }
+    
+    public void addHashTag(HashTag hashTag){
+        
+    }
+    
+    public void addMention(User mention){
+        
+    }
+    
+    public void addLike(User like){
+        
+    }
+    
+    public void removeLike(User like){
+        User user = likes.stream().filter(k -> k.getId() == like.getId()).findAny().orElse(null);
+        if (like != null && likes != null && likes.contains(user)) {
+            likes.remove(user);
+            if (user.getTweets().contains(this))
+                user.removeLike(this);
+        }
     }
 }

@@ -73,4 +73,8 @@ public class HashTag implements Serializable{
     public void setTweets(ArrayList<Tweet> tweets) {
         this.tweets = tweets;
     }
+    
+    public void addTweet(Tweet tweet){
+        
+    }
 }

@@ -60,12 +60,6 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "owner", cascade = CascadeType.MERGE)
     private ArrayList<Tweet> tweets;
 
-//    @OneToOne(cascade = CascadeType.PERSIST)
-//    @JoinTable(name="user_profile",
-//        joinColumns=
-//            @JoinColumn(name="user_id", referencedColumnName="ID"),
-//        inverseJoinColumns=
-//            @JoinColumn(name="profile_id", referencedColumnName="ID"))
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "profile_id", referencedColumnName = "id")
     private Profile profile;
@@ -74,7 +68,11 @@ public class User implements Serializable {
     private String rol;
 
     public User() {
-
+        supers = new ArrayList<>();
+        followers = new ArrayList<>();
+        likes = new ArrayList<>();
+        mentions = new ArrayList<>();
+        tweets = new ArrayList<>();
     }
 
     public User(String email, String password, String username, String rol) {
@@ -190,15 +188,14 @@ public class User implements Serializable {
         this.tweets = tweets;
     }
 
-    public void addTweet(Tweet tweet) {
-        if (tweet != null && tweets != null && !tweets.contains(tweet)) {
-            tweets.add(tweet);
-            if (tweet.getOwner() != this) {
-                tweet.setOwner(this);
-            }
-        }
+    public ArrayList<User> getSupers() {
+        return supers;
     }
 
+    public void setSupers(ArrayList<User> supers) {
+        this.supers = supers;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 7;
@@ -219,6 +216,59 @@ public class User implements Serializable {
         }
         final User other = (User) obj;
         return Objects.equals(this.username, other.username);
+    }
+    
+    public void addTweet(Tweet tweet) {
+        if (tweet != null && tweets != null && !tweets.contains(tweet)) 
+        {
+            tweets.add(tweet);
+            if (tweet.getOwner() != this) {
+                tweet.setOwner(this);
+            }
+        }
+    }
+    
+    public void removeTweet(Tweet tweet)
+    {
+        Tweet t = tweets.stream().filter(k -> k.getId() == tweet.getId()).findAny().orElse(null);
+        if (tweet != null && tweets != null && tweets.contains(t)) {
+            tweets.remove(t);
+            if (t.getOwner() != this)
+                t.setOwner(null);
+        }
+    }
+    
+    public void addLike(Tweet tweet) {
+        
+    }
+    
+    public void removeLike(Tweet tweet){
+        Tweet t = likes.stream().filter(k -> k.getId() == tweet.getId()).findAny().orElse(null);
+        if (tweet != null && likes != null && likes.contains(t)) {
+            likes.remove(t);
+            if (t.getLikes().contains(this))
+                t.removeLike(this);
+        }
+    }
+    
+    public void addFollower(User user){
+        
+    }
+    
+    public void removeFollower(User volger){
+        
+    }
+    
+    public void addSuper(User superUser){
+        
+    }
+    
+    public void removeSuper(User superUser){
+        
+    }
+    
+    public void addMention(Tweet mention){
+        
     }
 
 }

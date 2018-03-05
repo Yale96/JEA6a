@@ -5,6 +5,11 @@
  */
 package ModelTests;
 
+import Models.HashTag;
+import Models.Tweet;
+import Models.User;
+import java.util.ArrayList;
+import java.util.Date;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -44,7 +49,33 @@ public class HashTagTest {
     // public void hello() {}
     @Test
     public void testGettersAndSetters() {
-
+        long id = 1;
+        String testTag = "#DitIsEenTestTag";
+        
+        User owner = new User();
+        owner.setId(1);
+        owner.setPassword("Yannick");
+        owner.setEmail("Test");
+        owner.setUsername("Yale96");
+        owner.setRol("Admin");
+        
+        Tweet t = new Tweet();
+        t.setId(id);
+        t.setContent("Tessst");
+        t.setTimeStamp(new Date());
+        t.setOwner(owner);
+        
+        ArrayList<Tweet> tweets = new ArrayList<>();
+        tweets.add(t);
+        
+        HashTag testHashTag = new HashTag();
+        testHashTag.setId(id);
+        testHashTag.setContent(testTag);
+        testHashTag.setTweets(tweets);
+        
+        assertEquals(id, testHashTag.getId());
+        assertEquals(testTag, testHashTag.getContent()); 
+        assertEquals(tweets, testHashTag.getTweets());
     }
 
     @Test

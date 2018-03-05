@@ -57,6 +57,10 @@ public class TweetTest {
         owner.setUsername("Yale96");
         owner.setRol("Admin");
         
+        HashTag testHashTag = new HashTag();
+        testHashTag.setId(1);
+        testHashTag.setContent("#LMAO");
+        
         long id = 1;
         String content = "This is a test tweet";
         Date testDate = new Date();
@@ -71,6 +75,21 @@ public class TweetTest {
         t.setContent(content);
         t.setTimeStamp(testDate);
         t.setOwner(owner);
+                
+        responses.add(t);
+        hashtags.add(testHashTag);
+        mentionedUsers.add(owner);
+        likes.add(owner);
+        
+        t.setResponses(responses);
+        t.setHashtags(hashtags);
+        t.setMentionedUsers(mentionedUsers);
+        t.setLikes(likes);
+        
+        assertEquals(responses, t.getResponses());
+        assertEquals(hashtags, t.getHashtags());
+        assertEquals(mentionedUsers, t.getMentionedUsers());
+        assertEquals(likes, t.getLikes());
         
         assertEquals(id, t.getId());
         assertEquals(content, t.getContent());
