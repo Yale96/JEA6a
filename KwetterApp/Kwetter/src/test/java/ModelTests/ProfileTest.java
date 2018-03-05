@@ -42,4 +42,18 @@ public class ProfileTest {
     //
     // @Test
     // public void hello() {}
+    @Test
+    public void testGettersAndSetters() {
+
+    }
+
+    @Test
+    public void testAddMethods() {
+
+    }
+
+    @Test
+    public void testRemoveMethods() {
+
+    }
 }

@@ -5,6 +5,8 @@
  */
 package ModelTests;
 
+import Models.User;
+import java.security.MessageDigest;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -42,4 +44,55 @@ public class UserTest {
     //
     // @Test
     // public void hello() {}
+    @Test
+    public void testGettersAndSetters() {
+        long id = 1;
+        String email = "yannickvanleeuwen@i-lion.nl";
+        String password = "yannick";
+        String userName = "Yale96";
+        String rol = "Admin";
+        
+        String hashstring = null;
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(password.getBytes("UTF-8"));
+            StringBuilder hexString = new StringBuilder();
+
+            for (int i = 0; i < hash.length; i++) {
+                String hex = Integer.toHexString(0xff & hash[i]);
+                if(hex.length() == 1)
+                    hexString.append('0');
+                hexString.append(hex);
+            }
+
+            hashstring = hexString.toString();
+        }
+        catch (Exception x) {
+            System.out.println(x);
+        }
+        String expectedPassword = (hashstring == null || hashstring.isEmpty()) ? password : hashstring;
+        
+        User testUser = new User();
+        testUser.setId(id);
+        testUser.setPassword(password);
+        testUser.setEmail(email);
+        testUser.setUsername(userName);
+        testUser.setRol(rol);
+        
+        assertEquals(id, testUser.getId());
+        assertEquals(expectedPassword, testUser.getPassword());
+        assertEquals(userName, testUser.getUsername());
+        assertEquals(rol, testUser.getRol());
+                
+    }
+
+    @Test
+    public void testAddMethods() {
+
+    }
+
+    @Test
+    public void testRemoveMethods() {
+
+    }
 }

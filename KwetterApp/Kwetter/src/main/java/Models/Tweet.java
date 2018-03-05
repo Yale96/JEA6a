@@ -38,7 +38,7 @@ public class Tweet implements Serializable {
     
     @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
     
     @Column(nullable = false)
     private String content;
@@ -96,13 +96,17 @@ public class Tweet implements Serializable {
 
     public void setOwner(User owner) {
         this.owner = owner;
+        if(!owner.getTweets().contains(this))
+        {
+            owner.addTweet(this);
+        }
     }
     
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

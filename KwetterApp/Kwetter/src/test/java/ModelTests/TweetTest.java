@@ -5,6 +5,11 @@
  */
 package ModelTests;
 
+import Models.HashTag;
+import Models.Tweet;
+import Models.User;
+import java.util.ArrayList;
+import java.util.Date;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -17,22 +22,22 @@ import static org.junit.Assert.*;
  * @author yanni
  */
 public class TweetTest {
-    
+
     public TweetTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -42,4 +47,44 @@ public class TweetTest {
     //
     // @Test
     // public void hello() {}
+    @Test
+    public void testGettersAndSetters() {
+        //Dummy tweeter as owner of the tweet.
+        User owner = new User();
+        owner.setId(1);
+        owner.setPassword("Yannick");
+        owner.setEmail("Test");
+        owner.setUsername("Yale96");
+        owner.setRol("Admin");
+        
+        long id = 1;
+        String content = "This is a test tweet";
+        Date testDate = new Date();
+        
+        ArrayList<Tweet> responses = new ArrayList<Tweet>();
+        ArrayList<HashTag> hashtags = new ArrayList<HashTag>();
+        ArrayList<User> mentionedUsers = new ArrayList<User>();
+        ArrayList<User> likes = new ArrayList<User>(); 
+        
+        Tweet t = new Tweet();
+        t.setId(id);
+        t.setContent(content);
+        t.setTimeStamp(testDate);
+        t.setOwner(owner);
+        
+        assertEquals(id, t.getId());
+        assertEquals(content, t.getContent());
+        assertEquals(testDate, t.getTimeStamp());
+        assertEquals(owner, t.getOwner());
+    }
+
+    @Test
+    public void testAddMethods() {
+
+    }
+
+    @Test
+    public void testRemoveMethods() {
+
+    }
 }
