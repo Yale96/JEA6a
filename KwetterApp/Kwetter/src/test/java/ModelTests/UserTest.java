@@ -61,8 +61,6 @@ public class UserTest {
         follower.setUsername("uname");
         follower.setRol("rolleke");
         
-        
-        
         ArrayList<User> supers = new ArrayList<>();
         ArrayList<User> followers = new ArrayList<>();
         ArrayList<Tweet> likes = new ArrayList<>();
@@ -142,11 +140,23 @@ public class UserTest {
         uTwo.removeSuper(uOne);
         uTwo.addMention(tOne);
         
-        //assertEquals( ,);
+        assertEquals(uOne, uOne.getLikes().get(0));
+        assertEquals(uOne, uOne.getMentions().get(0));
+        assertEquals(tOne, tOne.getHashtags().get(0));
+
+        assertEquals(uOne, uOne.getLeaders().get(0));
+        assertEquals(uOne, uOne.getFollowers().get(0));
+        assertEquals(tOne, uOne.getMentions().get(0));
+        assertEquals(tOne, uOne.getTweets().get(0));
+        assertEquals(tOne, uOne.getLikes().get(0));
+
+        assertEquals(uOne, uTwo.getFollowers().get(0));
+        assertEquals(uTwo, uTwo.getLikes().get(0));
+        assertEquals(uTwo, uTwo.getMentions().get(0));
     }
 
     @Test
     public void testRemoveMethods() {
-
+        
     }
 }
