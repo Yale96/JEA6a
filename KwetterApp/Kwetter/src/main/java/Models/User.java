@@ -196,28 +196,6 @@ public class User implements Serializable {
         this.supers = supers;
     }
     
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 53 * hash + Objects.hashCode(this.id);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final User other = (User) obj;
-        return Objects.equals(this.username, other.username);
-    }
-    
     public void addTweet(Tweet tweet) {
         if (tweet != null && tweets != null && !tweets.contains(tweet)) 
         {
