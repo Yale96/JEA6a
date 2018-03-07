@@ -11,6 +11,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -38,5 +39,15 @@ public class HashTagResource {
     public HashTag getHashTag(@PathParam("id") Long id) {
         HashTag hashTag = hashTagService.getById(id);
         return hashTag;
+    }
+    
+    @POST
+    @Path("/add/{content}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public void addHashTag(@PathParam("content") String content)
+    {
+        HashTag h = new HashTag();
+        h.setContent(content);
+        hashTagService.addHashTag(h);
     }
 }

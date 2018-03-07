@@ -37,20 +37,26 @@ public class StartUp {
 
     @PostConstruct
     private void intData(){
+        Profile pOne = new Profile("TestOne", "TestOne", "TestOne", "TestOne", "TestOne");
         
         User uOne = new User("yannickvanleeuwen@i-lion.nl", "", "Yale96", "Admin");
         uOne.setPassword("Yannick");
-        uService.addUser(uOne);
-        
-        Profile pOne = new Profile("TestOne", "TestOne", "TestOne", "TestOne", "TestOne");
-        pService.addProfile(pOne);
+        User uTwo = new User("dennisvanleeuwen@i-lion.nl", "", "Dendi78", "Admin");
+        uOne.setPassword("Dennis");
+        uOne.setProfile(pOne);
         
         Tweet tOne = new Tweet("Test", new Date());
-        tService.addTweet(tOne);
+        tOne.setOwner(uOne);
         
         HashTag hOne = new HashTag("#DitIsEenTest");
-        hService.addHashTag(hOne);
         
-        uOne.setProfile(pOne);
+        uService.addUser(uOne);
+        uService.addUser(uTwo);
+        
+        pService.addProfile(pOne);
+        
+        tService.addTweet(tOne);
+        
+        hService.addHashTag(hOne);
     }
 }
