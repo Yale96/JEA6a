@@ -22,27 +22,6 @@ public class ProfileTest {
     public ProfileTest() {
     }
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
-
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
     @Test
     public void testGettersAndSetters() {
         Profile p = new Profile();
@@ -50,7 +29,7 @@ public class ProfileTest {
         String name = "Yannick";
         String location = "TillyWestSide";
         String web = "www.yannick.nl";
-        String bio = "Hoi ik ben Yannick. Een leuke jongeman uit het noorde van het zuiden van het land";
+        String bio = "Hoi ik ben Yannick. Een leuke jongeman uit het noorden van het zuiden van het land";
         String picture = "It's a dick pick";
         
         p.setId(id);

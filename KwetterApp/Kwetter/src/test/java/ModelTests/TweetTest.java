@@ -6,6 +6,7 @@
 package ModelTests;
 
 import Models.HashTag;
+import Models.Profile;
 import Models.Tweet;
 import Models.User;
 import java.util.ArrayList;
@@ -26,27 +27,6 @@ public class TweetTest {
     public TweetTest() {
     }
 
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
-
-    @Before
-    public void setUp() {
-    }
-
-    @After
-    public void tearDown() {
-    }
-
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
     @Test
     public void testGettersAndSetters() {
         //Dummy tweeter as owner of the tweet.
@@ -99,7 +79,17 @@ public class TweetTest {
 
     @Test
     public void testAddMethods() {
-
+        User uOne = new User();
+        Tweet tOne = new Tweet();
+        HashTag hOne = new HashTag();
+        
+        tOne.addLike(uOne);
+        tOne.addMention(uOne);
+        tOne.addHashTag(hOne);
+        
+        assertEquals(uOne, tOne.getLikes().get(0));
+        assertEquals(uOne, tOne.getMentionedUsers().get(0));
+        assertEquals(hOne, tOne.getHashtags().get(0));
     }
 
     @Test

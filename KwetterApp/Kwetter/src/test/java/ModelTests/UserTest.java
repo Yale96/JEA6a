@@ -28,22 +28,6 @@ public class UserTest {
     public UserTest() {
     }
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
-    
     @Test
     public void testGettersAndSetters() {
         long id = 1;
@@ -119,49 +103,14 @@ public class UserTest {
         assertEquals(likes, testUser.getLikes());
         assertEquals(mentions, testUser.getMentions());        
         assertEquals(tweets, testUser.getTweets());
-                
     }
 
     @Test
     public void testAddMethods() {
         User uOne = new User();
-//        uOne.setId(1);
-//        uOne.setPassword("Test");
-//        uOne.setEmail("Test");
-//        uOne.setUsername("Test");
-//        uOne.setRol("Test");
-        
         User uTwo = new User();
-//        uTwo.setId(1);
-//        uTwo.setPassword("Test");
-//        uTwo.setEmail("Test");
-//        uTwo.setUsername("Test");
-//        uTwo.setRol("Test");
-        
         Tweet tOne = new Tweet();
-//        tOne.setId(1);
-//        tOne.setOwner(uOne);
-//        tOne.setContent("Test");
-//        tOne.setTimeStamp(new Date());
-        
-//       Profile pOne = new Profile();
-//       Profile pTwo = new Profile();
-//        uOne.setProfile(pOne);
-//        uTwo.setProfile(pTwo);
-        
         Tweet tTwo = new Tweet();
-//        tTwo.setId(1);
-//        tTwo.setOwner(uOne);
-//        tTwo.setContent("Test");
-//        tTwo.setTimeStamp(new Date());
-        
-        HashTag hOne = new HashTag();
-//        hOne.setId(1);
-//        hOne.setContent("Testcontent");
-        
-        tOne.addLike(uOne);
-        tOne.addMention(uOne);
-        tOne.addHashTag(hOne);
         
         uOne.addSuper(uOne);
         uOne.addMention(tOne);
@@ -172,10 +121,6 @@ public class UserTest {
         uTwo.addLike(tTwo);
         uTwo.addMention(tTwo);
         
-        assertEquals(uOne, tOne.getLikes().get(0));
-        assertEquals(uOne, tOne.getMentionedUsers().get(0));
-        assertEquals(hOne, tOne.getHashtags().get(0));
-
         assertEquals(uOne, uOne.getLeaders().get(0));
         assertEquals(uOne, uOne.getFollowers().get(0));
         assertEquals(tOne, uOne.getMentions().get(0));
