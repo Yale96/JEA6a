@@ -216,8 +216,13 @@ public class User implements Serializable {
         }
     }
     
-    public void addLike(Tweet tweet) {
-        
+    public void addLike(Tweet like) {
+        if(like != null && likes != null && !likes.contains(like))
+        {
+            likes.add(like);
+            if(!like.getLikes().contains(this))
+                like.addLike(this);
+        }
     }
     
     public void removeLike(Tweet tweet){
@@ -229,33 +234,45 @@ public class User implements Serializable {
         }
     }
     
-    public void addFollower(User user){
-        
+    public void addFollower(User follower){
+        if(follower != null && followers != null && !followers.contains(follower))
+        {
+            followers.add(follower);
+            if(!follower.getLeaders().contains(this))
+                follower.addSuper(this);
+        }
     }
     
-    public void removeFollower(User volger){
-        
+    public void removeFollower(User follower){
+        if (follower != null && followers != null && followers.contains(follower)) {
+            followers.remove(follower);
+            if (follower.getLeaders().contains(this))
+                follower.removeSuper(this);
+        }
     }
     
     public void addSuper(User superUser){
-        
+        if (superUser != null && supers != null && !supers.contains(superUser)) {
+            supers.add(superUser);
+            if (!superUser.getFollowers().contains(this))
+                superUser.addFollower(this);
+        }
     }
     
     public void removeSuper(User superUser){
-        
+        if (superUser != null && supers != null && supers.contains(superUser)) {
+            supers.remove(superUser);
+            if (superUser.getFollowers().contains(this))
+                superUser.removeFollower(this);
+        }
     }
     
     public void addMention(Tweet mention){
-        
-    }
-    
-    public void addProfile(Profile profile)
-    {
-        
-    }
-    
-    public void removeProfile(Profile profile)
-    {
-        
+        if(mention != null && mentions != null && !mentions.contains(mention))
+        {
+            mentions.add(mention);
+            if(!mention.getMentionedUsers().contains(this))
+                mention.addMention(this);
+        }
     }
 }

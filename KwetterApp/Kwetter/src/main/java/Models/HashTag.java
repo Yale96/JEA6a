@@ -41,13 +41,12 @@ public class HashTag implements Serializable{
     
     public HashTag()
     {
-        
+        tweets = new ArrayList<Tweet>();
     }
     
     public HashTag(String content)
     {
         this.content = content;
-        tweets = new ArrayList<Tweet>();
     }
     
     public long getId() {
@@ -75,6 +74,10 @@ public class HashTag implements Serializable{
     }
     
     public void addTweet(Tweet tweet){
-        
+        if (tweet != null && tweets != null && !tweets.contains(tweet)) {
+            tweets.add(tweet);
+            if (!tweet.getHashtags().contains(this))
+                tweet.addHashTag(this);
+        }
     }
 }

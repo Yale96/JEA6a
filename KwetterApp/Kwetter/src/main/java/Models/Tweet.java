@@ -96,10 +96,10 @@ public class Tweet implements Serializable {
 
     public void setOwner(User owner) {
         this.owner = owner;
-//        if(!owner.getTweets().contains(this))
-//        {
-//            owner.addTweet(this);
-//        }
+        if(!owner.getTweets().contains(this))
+        {
+            owner.addTweet(this);
+        }
     }
     
     public long getId() {
@@ -159,15 +159,30 @@ public class Tweet implements Serializable {
     }
     
     public void addHashTag(HashTag hashTag){
-        
+        if(hashTag != null && hashtags != null && !hashtags.contains(hashTag))
+        {
+            hashtags.add(hashTag);
+            if(!hashTag.getTweets().contains(this))
+                hashTag.addTweet(this);
+        }
     }
     
     public void addMention(User mention){
-        
+        if(mention != null && mentionedUsers != null && !mentionedUsers.contains(mention))
+        {
+            mentionedUsers.add(mention);
+            if(!mention.getMentions().contains(this))
+                mention.addMention(this);
+        }
     }
     
     public void addLike(User like){
-        
+        if(like != null && likes != null && !likes.contains(like))
+        {
+            likes.add(like);
+            if(!like.getTweets().contains(this))
+                like.addLike(this);
+        }
     }
     
     public void removeLike(User like){
