@@ -248,5 +248,14 @@ public class User implements Serializable {
     public void addMention(Tweet mention){
         
     }
-
+    
+    public void addProfile(Profile profile)
+    {
+        
+    }
+    
+    public void removeProfile(Profile profile)
+    {
+        
+    }
 }
