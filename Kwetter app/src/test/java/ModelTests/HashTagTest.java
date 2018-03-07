@@ -11,9 +11,6 @@ import Models.Tweet;
 import Models.User;
 import java.util.ArrayList;
 import java.util.Date;
-import org.junit.*;
-import static org.junit.Assert.assertEquals;
-import org.junit.Test;
 
 /**
  *

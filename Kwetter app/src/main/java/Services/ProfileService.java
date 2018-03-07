@@ -5,11 +5,11 @@
  */
 package Services;
 
-import DAO.HashTagDao;
 import DAO.JPA;
 import DAO.ProfileDao;
-import Models.HashTag;
+import DAO.UserDao;
 import Models.Profile;
+import Models.User;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -20,24 +20,27 @@ import javax.inject.Inject;
  * @author Yannick van Leeuwen
  */
 @Stateless
-public class HashTagService {
+public class ProfileService {
+
+    @EJB
+    private UserService uService;
     
     @Inject @JPA
-    private HashTagDao hashTagDao;
+    private ProfileDao profileDao;
 
-    public void addHashTag(HashTag hashTag) {
-        hashTagDao.create(hashTag);
+    public void addProfile(Profile profile) {
+        profileDao.create(profile);
     }
 
-    public List<HashTag> getHashTags() {
-        return hashTagDao.getHashTags();
+    public List<Profile> getProfiles() {
+        return profileDao.getProfiles();
     }
 
-    public HashTag getById(Long id) {
-        return new HashTag("TestTag");
+    public Profile getById(Long id) {
+        return new Profile("Test", "Test", "Test", "Test", "Test");
     }
 
-    public HashTagService(){
+    public ProfileService(){
 
     }
 }
