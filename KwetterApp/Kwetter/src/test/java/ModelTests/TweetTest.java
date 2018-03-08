@@ -87,6 +87,10 @@ public class TweetTest {
         tOne.addMention(uOne);
         tOne.addHashTag(hOne);
         
+        tOne.setOwner(uOne);
+        
+        assertEquals(uOne, tOne.getOwner());
+        assertEquals(tOne, uOne.getTweets().get(0));
         assertEquals(uOne, tOne.getLikes().get(0));
         assertEquals(uOne, tOne.getMentionedUsers().get(0));
         assertEquals(hOne, tOne.getHashtags().get(0));

@@ -111,6 +111,7 @@ public class UserTest {
         User uTwo = new User();
         Tweet tOne = new Tweet();
         Tweet tTwo = new Tweet();
+        Profile pOne = new Profile();
         
         uOne.addSuper(uOne);
         uOne.addMention(tOne);
@@ -120,6 +121,10 @@ public class UserTest {
         uTwo.addFollower(uOne);
         uTwo.addLike(tTwo);
         uTwo.addMention(tTwo);
+        
+        uOne.setProfile(pOne);
+        
+        assertEquals(pOne, uOne.getProfile());
         
         assertEquals(uOne, uOne.getLeaders().get(0));
         assertEquals(uOne, uOne.getFollowers().get(0));

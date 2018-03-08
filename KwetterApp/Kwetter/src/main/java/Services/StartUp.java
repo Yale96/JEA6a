@@ -46,7 +46,6 @@ public class StartUp {
         uOne.setProfile(pOne);
         
         Tweet tOne = new Tweet("Test", new Date());
-        tOne.setOwner(uOne);
         
         HashTag hOne = new HashTag("#DitIsEenTest");
         
