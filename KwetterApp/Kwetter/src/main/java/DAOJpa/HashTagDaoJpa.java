@@ -50,4 +50,8 @@ public class HashTagDaoJpa extends DaoFacade<HashTag> implements HashTagDao {
          Query query = em.createQuery("SELECT h FROM HashTag h");
          return  new ArrayList<>(query.getResultList());
     }
+    
+     public void setEm(EntityManager em) {
+        this.em = em;
+    }
 }
