@@ -42,7 +42,7 @@ public class StartUp {
         User uOne = new User("yannickvanleeuwen@i-lion.nl", "", "Yale96", "Admin");
         uOne.setPassword("Yannick");
         User uTwo = new User("dennisvanleeuwen@i-lion.nl", "", "Dendi78", "Admin");
-        uOne.setPassword("Dennis");
+        uTwo.setPassword("Dennis");
         uOne.setProfile(pOne);
         
         Tweet tOne = new Tweet("Test", new Date());
