@@ -36,6 +36,7 @@ public class HashTagDaoJpa extends DaoFacade<HashTag> implements HashTagDao {
         return em;
     }
     
+    //Will override
     @Override
     public HashTag findById(Long id) {
         TypedQuery<HashTag> query = em.createNamedQuery("hashTag.findById", HashTag.class);
