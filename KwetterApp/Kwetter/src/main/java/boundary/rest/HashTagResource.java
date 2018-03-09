@@ -10,12 +10,16 @@ import Services.HashTagService;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  *
@@ -41,13 +45,14 @@ public class HashTagResource {
         return hashTag;
     }
     
+    
     @POST
-    @Path("/add/{content}")
+    @Path("/add")
     @Produces(MediaType.APPLICATION_JSON)
-    public void addHashTag(@PathParam("content") String content)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addHashTag(@Context HttpHeaders httPheaders, HashTag tag)
     {
-        HashTag h = new HashTag();
-        h.setContent(content);
-        hashTagService.addHashTag(h);
+        hashTagService.addHashTag(tag);
+        return Response.ok(hashTagService.getHashTags()).build();
     }
 }
