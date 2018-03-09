@@ -51,12 +51,9 @@ public class HashTagTest {
 //        hashTagDao = new HashTagDaoJpa();
 //        hashTagDao.setEm(em);
 //    }
-//
-//    // TODO add test methods here.
-//    // The methods must be annotated with annotation @Test. For example:
-//    //
+//     
 //    @Test
-//    public void findStudentSuccesful() {
+//    public void findHashTagSuccesful() {
 //        HashTag tag = new HashTag();
 //        long id = 2;
 //        tag.setContent("#TestContent");
